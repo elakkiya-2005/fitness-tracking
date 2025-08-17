@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mini Fitness Tracker</title>
+  <style>
+    body{font-family:Arial;margin:20px;}
+    table,th,td{border:1px solid #333;border-collapse:collapse;padding:5px;}
+  </style>
+</head>
+<body>
+  <h2>Fitness Tracker</h2>
+  <form id="f">
+    <input type="date" id="d" required>
+    <input type="text" id="t" placeholder="Type" required>
+    <input type="number" id="m" placeholder="Minutes" required>
+    <button>Add</button>
+  </form>
+  <table><tr><th>Date</th><th>Type</th><th>Minutes</th></tr><tbody id="list"></tbody></table>
+<script>
+let w=JSON.parse(localStorage.getItem("w")||"[]"),L=document.getElementById("list");
+function show(){L.innerHTML=w.map(x=>`<tr><td>${x.d}</td><td>${x.t}</td><td>${x.m}</td></tr>`).join("")}
+f.onsubmit=e=>{e.preventDefault();w.push({d:d.value,t:t.value,m:m.value});localStorage.w=JSON.stringify(w);show();f.reset();}
+show();
+</script>
+</body>
+</html>
